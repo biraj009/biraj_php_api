@@ -1,5 +1,8 @@
 <?php
 
+$version = 'v1';
+$module_folder = 'v1';
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -7,10 +10,13 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'aliases' => [
-        '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
-    ],
+        'modules' => [
+            $version => [
+                'class' => 'app\modules\\'.$module_folder.'\Module',
+            ],
+            'debug' => 'yii\debug\Module',
+
+        ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -43,14 +49,39 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => true,
             'rules' => [
+                [
+                  'class' => 'yii\rest\UrlRule',
+                  'controller' => [$version.'/register'],
+                  'pluralize' => false,
+                  'patterns' => [
+                       'POST register-user' => 'register-user', 
+                  ]
+                ],
+                [
+                  'class' => 'yii\rest\UrlRule',
+                  'controller' => [$version.'/register'],
+                  'pluralize' => false,
+                  'patterns' => [
+                       'POST update-user-profile' => 'update-user-profile', 
+                   ]
+                ],
+                [
+                  'class' => 'yii\rest\UrlRule',
+                  'controller' => [$version.'/login'],
+                  'pluralize' => false,
+                  'patterns' => [
+                       'POST user-login' => 'user-login', 
+                   ]
+                ],
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];
