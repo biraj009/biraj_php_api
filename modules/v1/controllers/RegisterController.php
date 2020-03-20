@@ -25,7 +25,7 @@ class RegisterController extends Controller
             }
             $users = new \app\modules\v1\models\User();
             $response = $users->addUserDetails($user_details);
-            if($response->save() && $response->validate() ){
+            if($response->validate() && $response->save()){
                 \Yii::$app->getResponse()->setStatusCode(201);
                 return ['status' => 201, 'message' => 'user successfully created', 'user' => $users];
             } else {
@@ -52,7 +52,7 @@ class RegisterController extends Controller
                   }
                   if($result){
                     $response = $user->updateUserDetails($update_user_details); 
-                    if($response->save() && $response->validate()){
+                    if($response->validate() && $response->save() ){
                         \Yii::$app->response->statusCode = 400;
                         return ['status' => 400,'message' => 'user updated successfully'];
                     } else {
