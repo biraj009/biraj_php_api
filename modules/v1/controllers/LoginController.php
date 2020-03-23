@@ -8,7 +8,7 @@ use yii\rest\Controller;
 class LoginController extends Controller
 {
     
-    public function actionUserLogin(){
+    public function actionUserLogin(){  
 
         $login_details = \Yii::$app->getRequest()->getBodyParams();
         if($login_details){
@@ -24,7 +24,7 @@ class LoginController extends Controller
                     if($result){
                         $acces_token = $userId->generateAuthKey(); 
                         \Yii::$app->response->statusCode = 200;
-                        return ['status' => 200,'message' => 'user successfully loggedin', 'acces_token' => $acces_token ];
+                        return ['status' => 200,'message' => 'user successfully loggedin', 'user' => $acces_token];
                     } else {
                         \Yii::$app->response->statusCode = 404;
                         return ['status' => 404,'message' => 'username and password does not match'];
