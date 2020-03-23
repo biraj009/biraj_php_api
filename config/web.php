@@ -60,7 +60,7 @@ $config = [
                   'controller' => [$version.'/register'],
                   'pluralize' => false,
                   'patterns' => [
-                       'POST register-user' => 'register-user', 
+                       'POST,PATCH register-user' => 'register-user', 
                   ]
                 ],
                 [
@@ -68,7 +68,7 @@ $config = [
                   'controller' => [$version.'/register'],
                   'pluralize' => false,
                   'patterns' => [
-                       'POST update-user-profile' => 'update-user-profile', 
+                       'POST,PATCH update-user-profile' => 'update-user-profile', 
                    ]
                 ],
                 [
@@ -76,7 +76,7 @@ $config = [
                   'controller' => [$version.'/login'],
                   'pluralize' => false,
                   'patterns' => [
-                       'POST user-login' => 'user-login', 
+                       'POST,PATCH user-login' => 'user-login', 
                    ]
                 ],
             ],
